@@ -1,0 +1,48 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        },
+        "verbose": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s - %(funcName)s"
+        },
+        "simple": {
+            "format": "%(levelname)s - %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "standard"
+        },
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "app.log",
+            "formatter": "verbose"
+        },
+        "rotating_file": {
+            "level": "WARNING",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "rotating_app.log",
+            "maxBytes": 5242880,
+            "backupCount": 3,
+            "formatter": "simple"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+            "propagate": true
+        },
+        "myapp.custom": {
+            "handlers": ["rotating_file"],
+            "level": "WARNING",
+            "propagate": false
+        }
+    }
+}
